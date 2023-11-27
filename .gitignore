@@ -11,6 +11,10 @@
 /.env*
 !/.env*.erb
 
+# Ignore RVM config files
+.rvmrc
+.versions.conf
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
