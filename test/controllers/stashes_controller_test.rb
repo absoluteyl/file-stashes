@@ -17,6 +17,22 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "index page displays stash information" do
+    stash = FactoryBot.create(:stash)
+    get stashes_url
+    assert_response :success
+    assert_select 'table' do
+      assert_select 'tbody tr', count: 1
+      assert_select 'tbody tr td', text: stash.id.to_s
+      assert_select 'tbody tr td a', text: 'Download'
+      assert_select 'tbody tr td form[action=?][method="post"]', stash_path(stash) do
+        assert_select 'button[type="submit"]', text: 'Delete'
+      end
+      assert_select 'tbody tr td', text: stash.created_at.to_s
+      assert_select 'tbody tr td', text: stash.updated_at.to_s
+    end
+  end
+
   test "should create stash" do
     # Create a file fixture to upload
     attachment = fixture_file_upload('stash_attachment.txt', 'text/plain')
