@@ -1,4 +1,9 @@
 class StashesControllerTest < ActionDispatch::IntegrationTest
+  test "should get stash index when accessing root url" do
+    get root_url
+    assert_response :success
+  end
+
   test "should create stash" do
     # Create a file fixture to upload
     attachment = fixture_file_upload('stash_attachment.txt', 'text/plain')
