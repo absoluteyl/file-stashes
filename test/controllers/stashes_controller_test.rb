@@ -43,4 +43,13 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to root_url
   end
+
+  test "should destroy stash" do
+    stash = FactoryBot.create(:stash)
+    assert_difference('Stash.count', -1) do
+      delete stash_url(stash)
+    end
+
+    assert_redirected_to root_url
+  end
 end
