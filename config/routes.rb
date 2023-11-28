@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "stashes#index"
+
+  # Defines the routes for the Stash resource
+  resources :stashes, only: [:index, :create]
 end
