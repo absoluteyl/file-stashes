@@ -8,7 +8,7 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
+      <th>UUID</th>
       <th>Download</th>
       <th>Delete</th>
       <th>Created at</th>
@@ -18,7 +18,7 @@
   <tbody>
     <% @stashes.each do |stash| %>
       <tr>
-        <td><%= stash.id %></td>
+        <td><%= stash.uuid %></td>
         <td><%= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached? %></td>
         <td><%= button_to 'Delete', stash_path(stash), method: :delete %></td>
         <td><%= stash.created_at %></td>
