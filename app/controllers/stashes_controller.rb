@@ -9,6 +9,12 @@ class StashesController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    stash = Stash.find(params[:id])
+    stash.destroy
+    redirect_to root_path
+  end
+
   private
 
   def stash_params

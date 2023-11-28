@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   root "stashes#index"
 
   # Defines the routes for the Stash resource
-  resources :stashes, only: [:index, :create]
+  resources :stashes, only: [:index, :create, :destroy]
 end
