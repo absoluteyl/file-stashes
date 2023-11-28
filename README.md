@@ -1,4 +1,4 @@
-# PicCollage Quiz
+# File Stashes
 
 A simple file sharing app allows users to upload and share files.
 
@@ -13,7 +13,7 @@ The setups steps expect following tools installed on the system.
 1. Check out the repository
 
   ```bash
-  $ git clone git@github.com:absoluteyl/piccollage-quiz.git
+  $ git clone git@github.com:absoluteyl/file-stashes.git
   ```
 
 2. Install dependencies

@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: piccollage_quiz_development
+  database: file_stashes_development
 
 test:
   <<: *default
-  database: piccollage_quiz_test
+  database: file_stashes_test
 
 production:
   <<: *default
-  database: piccollage_quiz_production
+  database: file_stashes_production
