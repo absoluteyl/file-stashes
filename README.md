@@ -1,24 +1,34 @@
-# README
+# PicCollage Quiz
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple file sharing app allows users to upload and share files.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+The setups steps expect following tools installed on the system.
 
-* System dependencies
+* Ruby version: 3.2.2
+* Rails version: 7.1.2
 
-* Configuration
+1. Check out the repository
 
-* Database creation
+  ```bash
+  $ git clone git@github.com:absoluteyl/piccollage-quiz.git
+  ```
 
-* Database initialization
+2. Install dependencies
 
-* How to run the test suite
+  ```bash
+  $ bundle install
+  ```
 
-* Services (job queues, cache servers, search engines, etc.)
+3. Create and setup the database
 
-* Deployment instructions
+  ```bash
+  $ rails db:setup
+  ```
 
-* ...
+4. Start the Rails server
+
+  ```bash
+  $ rails s
+  ```
