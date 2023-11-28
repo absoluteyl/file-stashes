@@ -9,7 +9,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'table' do
       assert_select 'thead tr', count: 1
-      assert_select 'thead tr th', text: 'ID'
+      assert_select 'thead tr th', text: 'UUID'
       assert_select 'thead tr th', text: 'Download'
       assert_select 'thead tr th', text: 'Delete'
       assert_select 'thead tr th', text: 'Created at'
@@ -23,7 +23,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'table' do
       assert_select 'tbody tr', count: 1
-      assert_select 'tbody tr td', text: stash.id.to_s
+      assert_select 'tbody tr td', text: stash.uuid
       assert_select 'tbody tr td a', text: 'Download'
       assert_select 'tbody tr td form[action=?][method="post"]', stash_path(stash) do
         assert_select 'button[type="submit"]', text: 'Delete'
