@@ -8,6 +8,7 @@ The setups steps expect following tools installed on the system.
 
 * Ruby version: 3.2.2
 * Rails version: 7.1.2
+* MySQL version: 5.7
 
 1. Check out the repository
 
