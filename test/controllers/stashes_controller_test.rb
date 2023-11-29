@@ -61,6 +61,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert stash.tokens.present?
   end
 
+  # Create Path
   test "should create stash" do
     # Create a file fixture to upload
     attachment = fixture_file_upload('stash_attachment.txt', 'text/plain')
@@ -72,6 +73,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to stash_path(Stash.last.uuid)
   end
 
+  # Destroy Path
   test "should destroy stash" do
     stash = FactoryBot.create(:stash)
     assert_difference('Stash.count', -1) do
