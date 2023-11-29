@@ -32,6 +32,22 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  # Show Path
+  test "should show stash detail" do
+    stash = FactoryBot.create(:stash)
+    token = stash.generate_uniq_token
+    get stash_path(stash.uuid)
+    assert_response :success
+    assert_select 'h1', text: 'Stash Detail'
+    assert_select '.stash_info p', text: "File Name: #{stash.attachment.blob.filename}"
+    assert_select '.stash_info p', text: "File Size: #{stash.attachment.blob.byte_size}"
+    assert_select '.stash_info p', text: "File Type: #{stash.attachment.blob.content_type}"
+    assert_select '.stash_info a', text: 'Download'
+    assert_select '.stash_info a', text: 'Share'
+    assert_select '.stash_share table thead tr th', text: 'Links Created'
+    assert_select '.stash_share table tbody tr td', text: token
+  end
+
   test "should create stash" do
     # Create a file fixture to upload
     attachment = fixture_file_upload('stash_attachment.txt', 'text/plain')
