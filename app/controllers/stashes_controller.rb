@@ -1,4 +1,6 @@
 class StashesController < ApplicationController
+  before_action :get_stash, only: [:destroy]
+
   def index
     @stashes = Stash.all
   end
@@ -13,12 +15,15 @@ class StashesController < ApplicationController
   end
 
   def destroy
-    stash = Stash.find(params[:id])
-    stash.destroy
-    redirect_to root_path
+    @stash.destroy
+    redirect_to stashes_path
   end
 
   private
+
+  def get_stash
+    @stash = Stash.find_by(uuid: params[:uuid])
+  end
 
   def stash_params
     params.require(:stash).permit(:attachment)

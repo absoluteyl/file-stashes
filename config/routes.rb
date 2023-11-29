@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   root "stashes#new"
 
   # Defines the routes for the Stash resource
-  resources :stashes, only: [:index, :new, :create, :destroy]
+  resources :stashes, only: [:index, :new, :create]
+  match '/stashes/:uuid', to: 'stashes#destroy', via: :delete
 end

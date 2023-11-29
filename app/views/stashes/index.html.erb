@@ -14,7 +14,7 @@
       <tr>
         <td><%= stash.uuid %></td>
         <td><%= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached? %></td>
-        <td><%= button_to 'Delete', stash_path(stash), method: :delete %></td>
+        <td><%= link_to "Delete", stash_path(stash.uuid), data: {"turbo-method": :delete} %></td>
         <td><%= stash.created_at %></td>
         <td><%= stash.updated_at %></td>
       </tr>
