@@ -11,6 +11,7 @@ class Stash < ApplicationRecord
       token = generate_token
     end
     Kredis.integer(self.class.token_key(token), expires_in: 1.hour).value = self.id
+    Kredis.unique_list(stash_key).append(token)
     token
   end
 
@@ -22,6 +23,10 @@ class Stash < ApplicationRecord
 
   def self.token_key(token)
     "token:#{token}"
+  end
+
+  def stash_key
+    "stash_tokens:#{self.id}"
   end
 
   def generate_token
