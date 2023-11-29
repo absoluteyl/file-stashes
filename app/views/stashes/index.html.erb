@@ -12,7 +12,7 @@
   <tbody>
     <% @stashes.each do |stash| %>
       <tr>
-        <td><%= stash.uuid %></td>
+        <td><%= link_to stash.uuid, stash_detail_path(stash.uuid) %></td>
         <td><%= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached? %></td>
         <td><%= link_to "Delete", stash_path(stash.uuid), data: {"turbo-method": :delete} %></td>
         <td><%= stash.created_at %></td>
