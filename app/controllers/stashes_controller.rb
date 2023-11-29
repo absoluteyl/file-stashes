@@ -1,8 +1,11 @@
 class StashesController < ApplicationController
-  before_action :get_stash, only: [:destroy]
+  before_action :get_stash, only: [:show, :destroy]
 
   def index
     @stashes = Stash.all
+  end
+
+  def show
   end
 
   def new
