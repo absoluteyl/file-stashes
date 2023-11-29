@@ -48,6 +48,15 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.stash_share table tbody tr td', text: token
   end
 
+  # Share Path
+  test "should generate new token" do
+    stash = FactoryBot.create(:stash)
+    put share_stash_path(stash.uuid)
+    assert_response :redirect
+    assert_redirected_to stash_path(stash.uuid)
+    assert stash.tokens.present?
+  end
+
   test "should create stash" do
     # Create a file fixture to upload
     attachment = fixture_file_upload('stash_attachment.txt', 'text/plain')
