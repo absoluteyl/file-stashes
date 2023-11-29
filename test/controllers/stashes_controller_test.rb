@@ -39,7 +39,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
       post stashes_url, params: { stash: { attachment: attachment } }
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to stash_path(Stash.last.uuid)
   end
 
   test "should destroy stash" do
@@ -48,6 +48,6 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
       delete stash_url(stash)
     end
 
-    assert_redirected_to root_url
+    assert_redirected_to stashes_path
   end
 end
