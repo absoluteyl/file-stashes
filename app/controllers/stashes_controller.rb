@@ -1,11 +1,16 @@
 class StashesController < ApplicationController
-  before_action :get_stash, only: [:show, :destroy]
+  before_action :get_stash, only: [:show, :share, :destroy]
 
   def index
     @stashes = Stash.all
   end
 
   def show
+  end
+
+  def share
+    @stash.generate_uniq_token
+    redirect_to stash_path(@stash.uuid)
   end
 
   def new
