@@ -10,15 +10,19 @@ class Stash < ApplicationRecord
     while Stash.find_by_token(token).present?
       token = generate_token
     end
-    Kredis.integer("share:#{token}", expires_in: 1.hour).value = self.id
+    Kredis.integer(self.class.token_key(token), expires_in: 1.hour).value = self.id
     token
   end
 
   def self.find_by_token(token)
-    find_by(id: Kredis.integer("share:#{token}").value)
+    find_by(id: Kredis.integer(token_key(token)).value)
   end
 
   private
+
+  def self.token_key(token)
+    "token:#{token}"
+  end
 
   def generate_token
     SecureRandom.hex(16)
