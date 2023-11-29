@@ -30,7 +30,9 @@ class StashesController < ApplicationController
   private
 
   def get_stash
-    @stash = Stash.find_by(uuid: params[:uuid])
+    key   = params[:token].present? ? 'token' : 'uuid'
+    value = params[key]
+    @stash = eval("Stash.find_by_#{key}('#{value}')")
   end
 
   def stash_params
