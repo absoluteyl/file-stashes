@@ -3,6 +3,8 @@ class Stash < ApplicationRecord
 
   before_create :generate_uniq_uuid
 
+  validates :attachment, presence: true
+
   def generate_uniq_token
     token = generate_token
     while Stash.find_by_token(token).present?
