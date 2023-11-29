@@ -4,7 +4,8 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "index page displays stash table header" do
+  # Index Path
+  test "should displays stash table header" do
     get stashes_url
     assert_response :success
     assert_select 'table' do
@@ -17,7 +18,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "index page displays stash information" do
+  test "should displays stash information" do
     stash = FactoryBot.create(:stash)
     get stashes_url
     assert_response :success
