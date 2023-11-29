@@ -7,3 +7,5 @@
   <%= link_to "Download", rails_blob_path(blob, disposition: "attachment") %>
   <%= link_to "Share", share_stash_path(@stash.uuid), data: {"turbo-method": :put} %>
 <% end%>
+
+<%= render 'share' %>
