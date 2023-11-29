@@ -13,8 +13,8 @@ class StashesController < ApplicationController
   end
 
   def create
-    stash = Stash.create!(stash_params)
-    redirect_to root_path
+    @stash = Stash.create!(stash_params)
+    redirect_to stash_path(@stash.uuid)
   end
 
   def destroy
