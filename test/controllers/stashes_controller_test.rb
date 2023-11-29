@@ -45,7 +45,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
   test "should destroy stash" do
     stash = FactoryBot.create(:stash)
     assert_difference('Stash.count', -1) do
-      delete stash_url(stash)
+      delete stash_path(stash.uuid)
     end
 
     assert_redirected_to stashes_path
