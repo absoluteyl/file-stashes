@@ -25,9 +25,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
       assert_select 'tbody tr', count: 1
       assert_select 'tbody tr td', text: stash.uuid
       assert_select 'tbody tr td a', text: 'Download'
-      assert_select 'tbody tr td form[action=?][method="post"]', stash_path(stash) do
-        assert_select 'button[type="submit"]', text: 'Delete'
-      end
+      assert_select 'tbody tr td a', text: 'Delete'
       assert_select 'tbody tr td', text: stash.created_at.to_s
       assert_select 'tbody tr td', text: stash.updated_at.to_s
     end
