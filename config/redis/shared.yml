@@ -1,0 +1,13 @@
+
+default: &default
+  url: <%= Rails.application.credentials[Rails.env.to_sym].dig(:cache, :url) %>
+  timeout: 1
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

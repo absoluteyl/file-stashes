@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "stashes#index"
+  root "stashes#new"
+
+  match '/t/:token', to: 'stashes#show', via: :get
 
   # Defines the routes for the Stash resource
-  resources :stashes, only: [:index, :create, :destroy]
+  resources :stashes, only: [:index, :new, :create]
+  match '/stashes/:uuid',       to: 'stashes#show',    via: :get,    as: :stash
+  match '/stashes/:uuid/share', to: "stashes#share",   via: :put,    as: :share_stash
+  match '/stashes/:uuid',       to: 'stashes#destroy', via: :delete
 end
