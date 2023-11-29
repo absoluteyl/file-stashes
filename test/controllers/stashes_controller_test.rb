@@ -1,7 +1,11 @@
 class StashesControllerTest < ActionDispatch::IntegrationTest
-  test "should get stash index when accessing root url" do
+  # Root Path / New Path
+  test "should get stash new when accessing root url" do
     get root_url
     assert_response :success
+    assert_select 'h1', text: 'Upload a file'
+    assert_select 'form input[type=file]', count: 1
+    assert_select 'form input[type=submit]', count: 1
   end
 
   # Index Path
