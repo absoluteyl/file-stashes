@@ -5,5 +5,5 @@
   <p>File Size: <%= blob.byte_size %></p>
   <p>File Type: <%= blob.content_type %></p>
   <%= link_to "Download", rails_blob_path(blob, disposition: "attachment") %>
-  <%= link_to "Share", stash_share_path(@stash.uuid), data: {"turbo-method": :put} %>
+  <%= link_to "Share", share_stash_path(@stash.uuid), data: {"turbo-method": :put} %>
 <% end%>
