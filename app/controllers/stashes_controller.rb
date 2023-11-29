@@ -1,7 +1,10 @@
 class StashesController < ApplicationController
   def index
     @stashes = Stash.all
-    @stash   = Stash.new
+  end
+
+  def new
+    @stash = Stash.new
   end
 
   def create
