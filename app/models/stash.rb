@@ -15,6 +15,17 @@ class Stash < ApplicationRecord
     token
   end
 
+  def tokens
+    tokens = Kredis.unique_list(stash_key).elements
+    tokens.map do |token|
+      if self.class.find_by_token(token).nil?
+        Kredis.unique_list(stash_key).remove(token)
+        tokens.delete(token)
+      end
+    end
+    tokens
+  end
+
   def self.find_by_token(token)
     find_by(id: Kredis.integer(token_key(token)).value)
   end
