@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   # Defines the routes for the Stash resource
   resources :stashes, only: [:index, :new, :create]
-  match '/stashes/:uuid', to: 'stashes#show',    via: :get
-  match '/stashes/:uuid', to: 'stashes#destroy', via: :delete
+  match '/stashes/:uuid',       to: 'stashes#show',    via: :get,    as: :stash
+  match '/stashes/:uuid/share', to: "stashes#share",   via: :put,    as: :share_stash
+  match '/stashes/:uuid',       to: 'stashes#destroy', via: :delete
 end
