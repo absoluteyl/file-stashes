@@ -1,19 +1,25 @@
 default: &default
   adapter: mysql2
-  username: <%= Rails.application.credentials[Rails.env.to_sym].dig(:database, :username) %>
-  password: <%= Rails.application.credentials[Rails.env.to_sym].dig(:database, :password) %>
-  host: <%= Rails.application.credentials[Rails.env.to_sym].dig(:database, :host) %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   <<: *default
-  database: file_stashes_development
+  username: <%= ENV['DB_USERNAME'].presence || 'root' %>
+  password: <%= ENV['DB_PASSWORD'].presence %>
+  host: <%= ENV['DB_HOST'].presence || '127.0.0.1' %>
+  database: <%= ENV['DB_NAME'].presence || 'file_stashes_development' %>
 
 test:
   <<: *default
+  username: <%= ENV['DB_USERNAME'].presence || 'root' %>
+  password: <%= ENV['DB_PASSWORD'].presence %>
+  host: <%= ENV['DB_HOST'].presence || 'mysql' %>
   database: file_stashes_test
 
 production:
   <<: *default
+  username: <%= ENV['DB_USERNAME'].presence %>
+  password: <%= ENV['DB_PASSWORD'].presence %>
+  host: <%= ENV['DB_HOST'].presence %>
   database: file_stashes_production
