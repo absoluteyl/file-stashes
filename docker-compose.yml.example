@@ -1,0 +1,30 @@
+version: '3.1'
+services:
+  file-stashes:
+    image: file-stashes:latest
+    container_name: file-stashes
+    depends_on:
+      - redis
+    restart: always
+    ports:
+      - 80:3000
+    networks:
+      - frontend
+      - backend
+    environment:
+      - HOST
+      - RAILS_MASTER_KEY
+      - REDIS_URL=redis://redis:6379/0
+
+  redis:
+    image: redis:5.0.6
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
