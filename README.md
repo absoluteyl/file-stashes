@@ -9,6 +9,8 @@ The following tools are developed basd on the following versions. Other versions
 * Ruby version: 3.2.2
 * Rails version: 7.1.2
 
+## Getting Started
+
 1. Check out the repository
 
   ```bash
