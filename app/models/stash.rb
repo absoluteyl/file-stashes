@@ -30,8 +30,10 @@ class Stash < ApplicationRecord
     attachment.blob.filename if attachment.attached?
   end
 
-  def self.find_by_token(token)
-    find_by(id: Kredis.integer(token_key(token)).value)
+  class << self
+    def find_by_token(token)
+      find_by(id: Kredis.integer(token_key(token)).value)
+    end
   end
 
   private
