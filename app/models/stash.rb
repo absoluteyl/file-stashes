@@ -26,8 +26,18 @@ class Stash < ApplicationRecord
     tokens
   end
 
-  def self.find_by_token(token)
-    find_by(id: Kredis.integer(token_key(token)).value)
+  def filename
+    attachment.blob.filename if attachment.attached?
+  end
+
+  class << self
+    def find_by_token(token)
+      find_by(id: Kredis.integer(token_key(token)).value)
+    end
+
+    def share_link(token)
+      "#{App.scheme}://#{App.host}/t/#{token}"
+    end
   end
 
   private

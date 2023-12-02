@@ -3,22 +3,24 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
   test "should get stash new when accessing root url" do
     get root_url
     assert_response :success
-    assert_select 'h1', text: 'Upload a file'
-    assert_select 'form input[type=file]', count: 1
-    assert_select 'form input[type=submit]', count: 1
+    assert_select 'h2', text: I18n.t('stash.titles.new')
+    assert_select 'form[action=?]', stashes_path, method: 'post' do
+      assert_select 'input[type=file]', count: 1
+      assert_select 'input[type=submit]', count: 1
+    end
   end
 
   # Index Path
   test "should displays stash table header" do
     get stashes_url
     assert_response :success
-    assert_select 'table' do
-      assert_select 'thead tr', count: 1
-      assert_select 'thead tr th', text: 'UUID'
-      assert_select 'thead tr th', text: 'Download'
-      assert_select 'thead tr th', text: 'Delete'
-      assert_select 'thead tr th', text: 'Created at'
-      assert_select 'thead tr th', text: 'Updated at'
+    assert_select 'h2', text: 'Stashes'
+    assert_select 'table thead tr' do
+      assert_select 'tr', count: 1
+      assert_select 'th:nth-child(1)', text: I18n.t('stash.attributes.filename')
+      assert_select 'th:nth-child(2)', text: Stash.human_attribute_name(:created_at)
+      assert_select 'th:nth-child(3)', text: Stash.human_attribute_name(:updated_at)
+      assert_select 'th:nth-child(4)', text: I18n.t('stash.labels.actions')
     end
   end
 
@@ -26,13 +28,13 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     stash = FactoryBot.create(:stash)
     get stashes_url
     assert_response :success
-    assert_select 'table' do
-      assert_select 'tbody tr', count: 1
-      assert_select 'tbody tr td', text: stash.uuid
-      assert_select 'tbody tr td a', text: 'Download'
-      assert_select 'tbody tr td a', text: 'Delete'
-      assert_select 'tbody tr td', text: stash.created_at.to_s
-      assert_select 'tbody tr td', text: stash.updated_at.to_s
+    assert_select 'table tbody tr' do
+      assert_select 'tr', count: 1
+      assert_select 'td:nth-child(1) a', text: stash.filename.to_s
+      assert_select 'td:nth-child(2)', text: I18n.l(stash.created_at, format: :datetime_for_console)
+      assert_select 'td:nth-child(3)', text: I18n.l(stash.updated_at, format: :datetime_for_console)
+      assert_select 'td:nth-child(4) a', text: I18n.t('stash.buttons.download')
+      assert_select 'td:nth-child(4) a', text: I18n.t('stash.buttons.delete')
     end
   end
 
@@ -42,14 +44,17 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     token = stash.generate_uniq_token
     get stash_path(stash.uuid)
     assert_response :success
-    assert_select 'h1', text: 'Stash Detail'
-    assert_select '.stash_info p', text: "File Name: #{stash.attachment.blob.filename}"
-    assert_select '.stash_info p', text: "File Size: #{stash.attachment.blob.byte_size}"
-    assert_select '.stash_info p', text: "File Type: #{stash.attachment.blob.content_type}"
-    assert_select '.stash_info a', text: 'Download'
-    assert_select '.stash_info a', text: 'Share'
-    assert_select '.stash_share table thead tr th', text: 'Links Created'
-    assert_select '.stash_share table tbody tr td', text: token
+    assert_select 'h2', text: stash.filename.to_s
+    assert_select '.stash-info table tbody' do
+      assert_select 'tr:nth-child(1) td:nth-child(1)', text: I18n.t('stash.attributes.byte_size')
+      assert_select 'tr:nth-child(1) td:nth-child(2)', text: stash.attachment.blob.byte_size.to_s
+      assert_select 'tr:nth-child(2) td:nth-child(1)', text: I18n.t('stash.attributes.content_type')
+      assert_select 'tr:nth-child(2) td:nth-child(2)', text: stash.attachment.blob.content_type.to_s
+    end
+    assert_select '.stash-info a', text: I18n.t('stash.buttons.download')
+    assert_select '.stash-info a', text: I18n.t('stash.buttons.share')
+    assert_select '.stash-share h4', text: I18n.t('stash.labels.share_links')
+    assert_select '.stash-share table tbody tr td a', text: Stash.share_link(token)
   end
 
   # Share Path

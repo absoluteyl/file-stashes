@@ -1,0 +1,6 @@
+%h4= I18n.t('stash.labels.share_links')
+%table.table.table-hover
+  %tbody
+    - @stash.tokens.each do |token|
+      %tr
+        %td= link_to Stash.share_link(token), Stash.share_link(token)
