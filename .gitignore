@@ -42,3 +42,7 @@
 # Ignore docker-compose files
 docker-compose*.yml
 compose*.yml
+
+# Ignore cert files
+/certs/*
+!/certs/.keep
