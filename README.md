@@ -12,23 +12,23 @@ The following tools are developed basd on the following versions. Other versions
 1. Check out the repository
 
   ```bash
-  $ git clone git@github.com:absoluteyl/file-stashes.git
+  git clone git@github.com:absoluteyl/file-stashes.git
   ```
 
 2. Install dependencies
 
   ```bash
-  $ bundle install
+  bundle install
   ```
 
 3. Create and setup the database
 
   ```bash
-  $ rails db:setup
+  rails db:setup
   ```
 
 4. Start the Rails server
 
   ```bash
-  $ rails s
+  rails s
   ```
