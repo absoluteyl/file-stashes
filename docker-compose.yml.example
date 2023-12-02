@@ -4,6 +4,7 @@ services:
     image: file-stashes:latest
     container_name: file-stashes
     depends_on:
+      - mysql
       - redis
     restart: always
     ports:
