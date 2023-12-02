@@ -1,4 +1,8 @@
-%h1 Upload a file
-= form_with(model: @stash, local: true) do |form|
-  = form.file_field :attachment
-  = form.submit 'Upload'
+.container.text-center
+  .row
+    .col-md-4.offset-md-4
+      = form_with(model: @stash, local: true, id: 'new-stash-form') do |f|
+        %h2 Upload a file
+        .input-group
+          = f.file_field :attachment, class: 'form-control', id: 'stash_attachment'
+          = f.submit 'Upload', class: 'input-group-text', for: 'stash_attachment'
