@@ -34,6 +34,10 @@ class Stash < ApplicationRecord
     def find_by_token(token)
       find_by(id: Kredis.integer(token_key(token)).value)
     end
+
+    def share_link(token)
+      "#{App.scheme}://#{App.host}/t/#{token}"
+    end
   end
 
   private
