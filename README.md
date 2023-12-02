@@ -17,16 +17,16 @@ The following tools are developed basd on the following versions. Other versions
   git clone git@github.com:absoluteyl/file-stashes.git
   ```
 
-2. We use [dotenv](<https://github.com/motdotla/dotenv>) to manage environment variables. Copy `.env` from example and fill in required values for your own environment.
-
-  ```bash
-  cp .env.example .env
-  ```
-
-3. Install dependencies
+2. Install dependencies
 
   ```bash
   bundle install
+  ```
+
+3. We use [dotenv](<https://github.com/motdotla/dotenv>) to manage environment variables. Copy `.env` from example and fill in required values for your own environment.
+
+  ```bash
+  cp .env.example .env
   ```
 
 4. Create and setup the database
