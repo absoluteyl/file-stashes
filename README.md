@@ -40,3 +40,34 @@ The following tools are developed basd on the following versions. Other versions
   ```bash
   rails s
   ```
+
+## Run the app using Docker
+
+1. Build docker image
+
+  ```bash
+  docker build -t file-stashes:latest .
+  ```
+
+2. Generate self-signed ssl certificate using [mkcert](https://github.com/FiloSottile/mkcert)
+
+  ```bash
+  # If it's the firt install of mkcert, run
+  mkcert -install
+
+  # Generate certificate for domain "docker.localhost" and their sub-domains
+  mkcert -cert-file certs/local-cert.pem -key-file certs/local-key.pem "docker.localhost" "*.docker.localhost"
+  ```
+
+3. Copy `docker-compose.yml` from example
+
+  ```bash
+  cp docker-compose.yml.example docker-compose.yml
+  ```
+
+3. Run docker containers
+
+  ```bash
+  # (Optional) add -d to run in background
+  docker-compose up
+  ```
