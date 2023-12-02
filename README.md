@@ -17,19 +17,25 @@ The following tools are developed basd on the following versions. Other versions
   git clone git@github.com:absoluteyl/file-stashes.git
   ```
 
-2. Install dependencies
+2. Copy .env from example and fill in required values for your own environment.
+
+  ```bash
+  cp .env.example .env
+  ```
+
+3. Install dependencies
 
   ```bash
   bundle install
   ```
 
-3. Create and setup the database
+4. Create and setup the database
 
   ```bash
   rails db:setup
   ```
 
-4. Start the Rails server
+5. Start the Rails server
 
   ```bash
   rails s
