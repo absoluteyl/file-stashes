@@ -27,7 +27,7 @@ class Stash < ApplicationRecord
   end
 
   def filename
-    attachment&.blob&.filename
+    attachment.blob.filename if attachment.attached?
   end
 
   def self.find_by_token(token)
