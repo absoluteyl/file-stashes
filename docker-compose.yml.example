@@ -1,0 +1,65 @@
+version: '3.1'
+services:
+  reverse-proxy:
+    image: traefik:v2.10.6
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/static.yml:/etc/traefik/traefik.yml:ro
+      - ./docker/dynamic.yml:/etc/traefik/dynamic.yml:ro
+      - ./certs:/etc/certs:ro
+    networks:
+      - frontend
+  file-stashes:
+    image: file-stashes:latest
+    container_name: file-stashes
+    depends_on:
+      - reverse-proxy
+      - mysql
+      - redis
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=file-stashes_frontend"
+      - "traefik.http.routers.file-stashes.rule=Host(`file-stashes.docker.localhost`)"
+      - "traefik.http.routers.file-stashes.tls=true"
+      - "traefik.http.services.file-stashes.loadbalancer.server.port=3000"
+    networks:
+      - frontend
+      - backend
+    environment:
+      - HOST
+      - RAILS_MASTER_KEY
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_HOST=mysql
+      - REDIS_URL=redis://redis:6379/0
+  mysql:
+    image: mysql:5.7
+    platform: linux/x86_64
+    container_name: mysql
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    networks:
+      - backend
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+  redis:
+    image: redis:5.0.6
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:

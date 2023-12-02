@@ -1,13 +1,15 @@
 
 default: &default
-  url: <%= Rails.application.credentials[Rails.env.to_sym].dig(:cache, :url) %>
   timeout: 1
 
 development:
   <<: *default
+  url: <%= ENV['REDIS_URL'].presence || 'redis://127.0.0.1:6379/0' %>
 
 test:
   <<: *default
+  url: <%= ENV['REDIS_URL'].presence || 'redis://redis:6379/0' %>
 
 production:
   <<: *default
+  url: <%= ENV['REDIS_URL'].presence %>
