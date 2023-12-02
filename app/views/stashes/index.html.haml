@@ -1,17 +1,21 @@
-%h1 Stash List
-%table
-  %thead
-    %tr
-      %th UUID
-      %th Download
-      %th Delete
-      %th Created at
-      %th Updated at
-  %tbody
-    - @stashes.each do |stash|
-      %tr
-        %td= link_to stash.uuid, stash_path(stash.uuid)
-        %td= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached?
-        %td= link_to "Delete", stash_path(stash.uuid), data: {"turbo-method": :delete}
-        %td= stash.created_at
-        %td= stash.updated_at
+.container.text-center
+  .row
+    .col-md-8.offset-md-2
+      .stash-list
+        %h2 Stashes
+        %table#stashes-table.table.table-hover
+          %thead
+            %tr
+              %th UUID
+              %th Download
+              %th Delete
+              %th Created at
+              %th Updated at
+          %tbody
+            - @stashes.each do |stash|
+              %tr
+                %td= link_to stash.uuid, stash_path(stash.uuid)
+                %td= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached?
+                %td= link_to "Delete", stash_path(stash.uuid), data: { "turbo-method": :delete }
+                %td= stash.created_at
+                %td= stash.updated_at
