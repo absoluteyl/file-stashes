@@ -12,6 +12,7 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
   test "should displays stash table header" do
     get stashes_url
     assert_response :success
+    assert_select 'h2', text: 'Stashes'
     assert_select 'table' do
       assert_select 'thead tr', count: 1
       assert_select 'thead tr th', text: 'UUID'
