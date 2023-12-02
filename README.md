@@ -4,12 +4,10 @@ A simple file sharing app allows users to upload and share files.
 
 ## Prerequisites
 
-The setups steps expect following tools installed on the system.
+The following tools are developed basd on the following versions. Other versions may work but not tested.
 
 * Ruby version: 3.2.2
 * Rails version: 7.1.2
-* MySQL version: 5.7
-* Redis version: 5.0.6
 
 1. Check out the repository
 
