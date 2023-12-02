@@ -3,5 +3,4 @@
   %tbody
     - @stash.tokens.each do |token|
       %tr
-        - link = "#{App.scheme}://#{App.host}/t/#{token}"
-        %td= link_to link, link
+        %td= link_to Stash.share_link(token), Stash.share_link(token)
