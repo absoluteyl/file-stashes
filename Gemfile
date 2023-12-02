@@ -29,7 +29,6 @@ gem "hamlit"
 # Bootstrap 5 []https://github.com/twbs/bootstrap-rubygem]
 gem "bootstrap"
 gem "sassc-rails"
-gem "jquery-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
