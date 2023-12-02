@@ -33,8 +33,17 @@ services:
     networks:
       - frontend
       - backend
-    env_file:
-      - ./docker/docker.env
+    environment:
+      - HOST
+      - RAILS_MASTER_KEY
+      - DB_USERNAME
+      - DB_PASSWORD
+      - DB_HOST=mysql
+      - REDIS_URL=redis://redis:6379/0
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_REGION
+      - AWS_BUCKET_NAME
   mysql:
     image: mysql:5.7
     platform: linux/x86_64
