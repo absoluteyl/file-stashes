@@ -1,0 +1,24 @@
+---
+en:
+  activerecord:
+    attributes:
+      stash:
+        uuid: UUID
+        created_at: Create Time
+        updated_at: Update Time
+  stash:
+    attributes:
+      filename: File Name
+      byte_size: File Size
+      content_type: Content Type
+    labels:
+      actions: Actions
+      share_links: Available Share Links
+    buttons:
+      upload: Upload
+      download: Download
+      share: Share
+      delete: Delete
+    titles:
+      index: Stashes
+      new: Upload a file

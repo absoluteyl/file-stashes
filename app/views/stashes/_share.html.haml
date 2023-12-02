@@ -1,8 +1,7 @@
-%table
-  %thead
-    %tr
-      %th Links Created
+%h4= I18n.t('stash.labels.share_links')
+%table.table.table-hover
   %tbody
     - @stash.tokens.each do |token|
       %tr
-        %td= link_to token, "#{App.scheme}://#{App.host}/t/#{token}"
+        - link = "#{App.scheme}://#{App.host}/t/#{token}"
+        %td= link_to link, link

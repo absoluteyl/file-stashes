@@ -1,9 +1,8 @@
-.container.text-center
-  .row
-    .col-md-4.offset-md-4
-      .new-stash
-        %h2 Upload a file
-        = form_with(model: @stash, local: true, id: 'new-stash-form') do |f|
-          .input-group
-            = f.file_field :attachment, class: 'form-control', id: 'stash_attachment'
-            = f.submit 'Upload', class: 'input-group-text', for: 'stash_attachment'
+.row
+  .col-md-4.offset-md-4
+    .new-stash
+      %h2= I18n.t('stash.titles.new')
+      = form_with(model: @stash, local: true, id: 'new-stash-form') do |f|
+        .input-group
+          = f.file_field :attachment, class: 'form-control', id: 'stash_attachment'
+          = f.submit I18n.t('stash.buttons.upload'), class: 'input-group-text'

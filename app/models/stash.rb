@@ -26,6 +26,10 @@ class Stash < ApplicationRecord
     tokens
   end
 
+  def filename
+    attachment&.blob&.filename
+  end
+
   def self.find_by_token(token)
     find_by(id: Kredis.integer(token_key(token)).value)
   end

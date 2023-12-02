@@ -1,21 +1,21 @@
-.container.text-center
-  .row
-    .col-md-8.offset-md-2
-      .stash-list
-        %h2 Stashes
-        %table#stashes-table.table.table-hover
-          %thead
+.row
+  .col-md-10.offset-md-1
+    .stash-list
+      %h2= I18n.t('stash.titles.index')
+      %table#stashes-table.table.table-hover
+        %thead
+          %tr
+            %th= I18n.t('stash.attributes.filename')
+            %th= Stash.human_attribute_name(:created_at)
+            %th= Stash.human_attribute_name(:updated_at)
+            %th{ colspan: 2 }= I18n.t('stash.labels.actions')
+        %tbody
+          - @stashes.each do |stash|
             %tr
-              %th UUID
-              %th Download
-              %th Delete
-              %th Created at
-              %th Updated at
-          %tbody
-            - @stashes.each do |stash|
-              %tr
-                %td= link_to stash.uuid, stash_path(stash.uuid)
-                %td= link_to 'Download', rails_blob_path(stash.attachment, disposition: 'attachment') if stash.attachment.attached?
-                %td= link_to "Delete", stash_path(stash.uuid), data: { "turbo-method": :delete }
-                %td= stash.created_at
-                %td= stash.updated_at
+              - if stash.attachment.attached?
+                %td= link_to stash.filename, stash_path(stash.uuid)
+                %td= localized_datetime(stash.created_at)
+                %td= localized_datetime(stash.updated_at)
+                %td
+                  = link_to I18n.t('stash.buttons.download'), rails_blob_path(stash.attachment, disposition: 'attachment'), class: 'btn btn-outline-dark'
+                  = link_to I18n.t('stash.buttons.delete'), stash_path(stash.uuid), data: { "turbo-method": :delete }, class: 'btn btn-outline-danger'

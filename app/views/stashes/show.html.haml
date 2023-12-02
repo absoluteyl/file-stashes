@@ -1,11 +1,22 @@
-%h1 Stash Detail
-- if @stash.present?
-  .stash_info
-    - blob = @stash.attachment.blob
-    %p File Name: #{blob.filename}
-    %p File Size: #{blob.byte_size}
-    %p File Type: #{blob.content_type}
-    = link_to "Download", rails_blob_path(blob, disposition: "attachment")
-    = link_to "Share", share_stash_path(@stash.uuid), data: {"turbo-method": :put}
-  .stash_share
-    = render 'share'
+.row
+  .col-md-8.offset-md-2
+    .stash-info
+      - if @stash.present?
+        - blob = @stash.attachment.blob
+        - if blob.present?
+          %h2= blob.filename
+          %table.table.table-hover
+            %tbody
+              %tr
+                %td=I18n.t('stash.attributes.byte_size')
+                %td= blob.byte_size
+              %tr
+                %td=I18n.t('stash.attributes.content_type')
+                %td= blob.content_type
+              %tr
+                %td=Stash.human_attribute_name(:created_at)
+                %td= localized_datetime(blob.created_at)
+          = link_to I18n.t('stash.buttons.download'), rails_blob_path(blob, disposition: "attachment"), class: "btn btn-outline-dark"
+          = link_to I18n.t('stash.buttons.share'), share_stash_path(@stash.uuid), data: {"turbo-method": :put}, class: 'btn btn-outline-dark'
+    .stash-share
+      = render 'share'
