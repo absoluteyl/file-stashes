@@ -1,0 +1,11 @@
+%h1 Stash Detail
+- if @stash.present?
+  .stash_info
+    - blob = @stash.attachment.blob
+    %p File Name: #{blob.filename}
+    %p File Size: #{blob.byte_size}
+    %p File Type: #{blob.content_type}
+    = link_to "Download", rails_blob_path(blob, disposition: "attachment")
+    = link_to "Share", share_stash_path(@stash.uuid), data: {"turbo-method": :put}
+  .stash_share
+    = render 'share'

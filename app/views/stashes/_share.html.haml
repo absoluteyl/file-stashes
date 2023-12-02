@@ -1,0 +1,8 @@
+%table
+  %thead
+    %tr
+      %th Links Created
+  %tbody
+    - @stash.tokens.each do |token|
+      %tr
+        %td= link_to token, "#{App.scheme}://#{App.host}/t/#{token}"
