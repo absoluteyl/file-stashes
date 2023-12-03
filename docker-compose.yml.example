@@ -17,7 +17,7 @@ services:
     networks:
       - frontend
   file-stashes:
-    image: file-stashes:latest
+    image: absoluteyl/file-stashes:latest
     container_name: file-stashes
     depends_on:
       - reverse-proxy
