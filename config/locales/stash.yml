@@ -22,3 +22,5 @@ en:
     titles:
       index: Stashes
       new: Upload a file
+    messages:
+      no_preview: No preview available
