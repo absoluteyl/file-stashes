@@ -13,6 +13,13 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
+# Setup nodejs installation script
+ARG NODE_COMMANDS='mkdir -p /etc/apt/keyrings && \
+        curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --batch --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+        echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+        apt-get update && apt-get install -y nodejs'
+ENV NODE_MAJOR=21 \
+    NODE_SCRIPT=$NODE_COMMANDS
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -20,6 +27,9 @@ FROM base as build
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libvips pkg-config default-libmysqlclient-dev
+
+# Install Node.js
+RUN /bin/bash -c "$NODE_SCRIPT"
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -44,6 +54,9 @@ FROM base
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install Node.js
+RUN /bin/bash -c "$NODE_SCRIPT"
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
