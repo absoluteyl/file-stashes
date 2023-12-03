@@ -52,7 +52,7 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips ffmpeg && \
+    apt-get install --no-install-recommends -y curl libvips poppler-utils ffmpeg && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install Node.js
