@@ -72,7 +72,7 @@ The following tools are developed basd on the following versions. Other versions
   cp docker-compose.yml.example docker-compose.yml
   ```
 
-3. Run docker containers
+4. Run docker containers
 
   ```bash
   # (Optional) add -d to run in background
