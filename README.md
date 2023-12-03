@@ -9,6 +9,20 @@ The following tools are developed basd on the following versions. Other versions
 * Ruby version: 3.2.2
 * Rails version: 7.1.2
 
+### Notice
+
+1. Starting from Rails 7, `vips` becomes the default variant processor. If you are using MacOS, you may need to install `vips` manually. See [this issue](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#active-storage-default-variant-processor-changed-to-vips) and [refence](https://stackoverflow.com/questions/70849182/could-not-open-library-vips-42-could-not-open-library-libvips-42-dylib)
+
+    ```bash
+    brew install vips
+    ```
+
+2. To show preview of PDF and video files, you need to install `poppler` and `ffmpeg` manually. See [reference](https://api.rubyonrails.org/classes/ActiveStorage/Preview.html)
+
+    ```bash
+    brew install poppler ffmpeg
+    ```
+
 ## Getting Started
 
 1. Check out the repository
