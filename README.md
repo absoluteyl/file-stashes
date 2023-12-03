@@ -50,7 +50,7 @@ The following tools are developed basd on the following versions. Other versions
 
 ## Run the app using Docker
 
-1. Build docker image
+1. Build docker image. This step is optional, you can skip this step to use the pre-build image from [Docker Hub](https://hub.docker.com/r/absoluteyl/file-stashes)
 
   ```bash
   docker build -t file-stashes:latest .
