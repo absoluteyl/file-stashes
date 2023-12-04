@@ -24,3 +24,4 @@ en:
       new: Upload a file
     messages:
       no_preview: No preview available
+      not_found: Whoops, the stash you're looking for is gone.
