@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "stashes#new"
 
-  match '/t/:token', to: 'stashes#show', via: :get
+  match '/t/:token', to: 'stashes#show', via: :get, as: :shared_stash
 
   # Defines the routes for the Stash resource
   resources :stashes, only: [:index, :new, :create]
