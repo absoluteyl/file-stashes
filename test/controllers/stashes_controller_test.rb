@@ -78,6 +78,31 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'h2', text: I18n.t('stash.messages.not_found')
   end
 
+  # Show Token Path
+  test "should show stash detail when access by token" do
+    stash = FactoryBot.create(:stash)
+    token = stash.generate_uniq_token
+    get shared_stash_path(token)
+    assert_response :success
+    assert_select 'h2', text: stash.filename.to_s
+    assert_select '.stash-info table tbody' do
+      assert_select 'tr:nth-child(1) td:nth-child(1)', text: I18n.t('stash.attributes.byte_size')
+      assert_select 'tr:nth-child(1) td:nth-child(2)', text: stash.attachment.blob.byte_size.to_s
+      assert_select 'tr:nth-child(2) td:nth-child(1)', text: I18n.t('stash.attributes.content_type')
+      assert_select 'tr:nth-child(2) td:nth-child(2)', text: stash.attachment.blob.content_type.to_s
+    end
+    assert_select '.stash-info a', text: I18n.t('stash.buttons.download')
+    assert_select '.stash-info a', text: I18n.t('stash.buttons.share')
+    assert_select '.stash-share h4', text: I18n.t('stash.labels.share_links')
+    assert_select '.stash-share table tbody tr td a', text: Stash.share_link(token)
+  end
+
+  test "should show 404 page when stash not found before show when acess by token" do
+    get shared_stash_path('invalid-token')
+    assert_response :not_found
+    assert_select 'h2', text: I18n.t('stash.messages.not_found')
+  end
+
   # Create Path
   test "should create stash" do
     # Create a file fixture to upload
