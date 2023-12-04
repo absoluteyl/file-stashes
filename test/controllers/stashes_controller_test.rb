@@ -57,6 +57,12 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.stash-share table tbody tr td a', text: Stash.share_link(token)
   end
 
+  test "should show 404 page when stash not found before show" do
+    get stash_path('invalid-uuid')
+    assert_response :not_found
+    assert_select 'h2', text: I18n.t('stash.messages.not_found')
+  end
+
   # Share Path
   test "should generate new token" do
     stash = FactoryBot.create(:stash)
@@ -64,6 +70,12 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     assert_redirected_to stash_path(stash.uuid)
     assert stash.tokens.present?
+  end
+
+  test "should show 404 page when stash not found before share" do
+    put share_stash_path('invalid-uuid')
+    assert_response :not_found
+    assert_select 'h2', text: I18n.t('stash.messages.not_found')
   end
 
   # Create Path
@@ -86,5 +98,11 @@ class StashesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to stashes_path
+  end
+
+  test "should show 404 page when stash not found before destroy" do
+    delete stash_path('invalid-uuid')
+    assert_response :not_found
+    assert_select 'h2', text: I18n.t('stash.messages.not_found')
   end
 end

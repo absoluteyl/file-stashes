@@ -1,5 +1,6 @@
 class StashesController < ApplicationController
-  before_action :get_stash, only: [:show, :share, :destroy]
+  before_action :get_stash,            only: [:show, :share, :destroy]
+  before_action :validate_stash_exist, only: [:show, :share, :destroy]
 
   def index
     @stashes = Stash.all
@@ -18,8 +19,12 @@ class StashesController < ApplicationController
   end
 
   def create
-    @stash = Stash.create!(stash_params)
-    redirect_to stash_path(@stash.uuid)
+    @stash = Stash.new(stash_params)
+    if @stash.save
+      redirect_to stash_path(@stash.uuid)
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -33,6 +38,10 @@ class StashesController < ApplicationController
     key   = params[:token].present? ? 'token' : 'uuid'
     value = params[key]
     @stash = eval("Stash.find_by_#{key}('#{value}')")
+  end
+
+  def validate_stash_exist
+    render_not_found unless @stash
   end
 
   def stash_params
