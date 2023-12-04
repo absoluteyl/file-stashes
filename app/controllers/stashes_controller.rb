@@ -6,6 +6,7 @@ class StashesController < ApplicationController
   end
 
   def show
+    render_not_found unless @stash
   end
 
   def share
@@ -23,8 +24,12 @@ class StashesController < ApplicationController
   end
 
   def destroy
-    @stash.destroy
-    redirect_to stashes_path
+    if @stash
+      @stash.destroy
+      redirect_to stashes_path
+    else
+      render_not_found
+    end
   end
 
   private
