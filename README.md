@@ -2,6 +2,16 @@
 
 A simple file sharing app allows users to upload and share files.
 
+## Features
+
+1. A user can upload and share files.
+2. Sharing links are randomly generated.
+3. Sharing links will expire in 1 hour.
+
+### Architecture
+
+![Architecture Diagram](public/file_stashes_architecture.png)
+
 ## Prerequisites
 
 The following tools are developed basd on the following versions. Other versions may work but not tested.
