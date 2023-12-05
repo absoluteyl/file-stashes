@@ -74,7 +74,7 @@ The following tools are developed based on the following versions. Other version
 
 ## Run the app using Docker
 
-1. Build docker image. This step is optional, you can skip this step to use the pre-build image from [Docker Hub](https://hub.docker.com/r/absoluteyl/file-stashes)
+1. Build docker image
 
     ```bash
     docker build -t file-stashes:latest .
