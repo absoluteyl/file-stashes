@@ -6,7 +6,7 @@ A simple file sharing app allows users to upload and share files.
 
 1. A user can upload and share files.
 2. Sharing links are randomly generated.
-3. Sharing links will expire in 1 hour.
+3. Sharing links will expire (in 1 hour).
 
 ## Prerequisites
 
