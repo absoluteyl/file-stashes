@@ -83,7 +83,9 @@ The following tools are developed based on the following versions. Other version
 2. Generate self-signed ssl certificate using [mkcert](https://github.com/FiloSottile/mkcert)
 
     ```bash
-    # If it's the firt install of mkcert, run
+    # (Optional) If you don't have mkcert installed, install it first:
+    brew install mkcert
+    # (Optional) Install root certificate after installation
     mkcert -install
 
     # Generate certificate for domain "docker.localhost" and their sub-domains
