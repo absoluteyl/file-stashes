@@ -19,7 +19,7 @@ The following tools are developed based on the following versions. Other version
 
 ### Notice
 
-1. Starting from Rails 7, `vips` becomes the default variant processor. If you are using MacOS, you may need to install `vips` manually. See [this issue](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#active-storage-default-variant-processor-changed-to-vips) and [refence](https://stackoverflow.com/questions/70849182/could-not-open-library-vips-42-could-not-open-library-libvips-42-dylib)
+1. Starting from Rails 7, `vips` becomes the default variant processor. If you are using MacOS, you may need to install `vips` manually. See [this issue](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html#active-storage-default-variant-processor-changed-to-vips) and [reference](https://stackoverflow.com/questions/70849182/could-not-open-library-vips-42-could-not-open-library-libvips-42-dylib)
 
     ```bash
     brew install vips
