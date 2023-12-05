@@ -10,7 +10,7 @@ A simple file sharing app allows users to upload and share files.
 
 ### Architecture
 
-![Architecture Diagram](public/file-stashes-architecture.png)
+![Architecture Diagram](public/file_stashes_architecture.png)
 
 ## Prerequisites
 
