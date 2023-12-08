@@ -35,9 +35,11 @@ class StashesController < ApplicationController
   private
 
   def get_stash
-    key   = params[:token].present? ? 'token' : 'uuid'
-    value = params[key]
-    @stash = eval("Stash.find_by_#{key}('#{value}')")
+    if params[:token].present?
+      @stash = Stash.find_by_token(params[:token])
+    elsif params[:uuid].present?
+      @stash = Stash.find_by_uuid(params[:uuid])
+    end
   end
 
   def validate_stash_exist
