@@ -9,7 +9,7 @@ gem "rails", "~> 7.1.2"
 gem "sprockets-rails"
 
 # Use MySQL as the database for Active Record
-gem 'mysql2', '~> 0.5.5'
+gem "mysql2", "~> 0.5.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -73,5 +73,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", "~> 3.39.2"
   gem "selenium-webdriver", "~> 4.15.0"
-  gem 'factory_bot_rails', "~> 6.4.2"
+  gem "factory_bot_rails", "~> 6.4.2"
 end
